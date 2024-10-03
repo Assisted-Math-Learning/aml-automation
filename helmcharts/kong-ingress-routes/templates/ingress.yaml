@@ -17,11 +17,11 @@ spec:
   {{- end}}
   {{- $global_domains := $.Values.global.domain | default (list) | list }}
   {{- $value_domains := $value.domains | default (list) }}
-  {{- $merged_domains := concat $global_domains $value_domains }}
+  {{- $domains := $value_domains | default $global_domains }}
   tls:
   - secretName: {{ default $.Values.cert_secret_name $value.cert_secret_name  }}
     hosts:
-    {{- toYaml $merged_domains | nindent 4}}
+    {{- toYaml $domains | nindent 4}}
   rules:
   - http:
       paths:

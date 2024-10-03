@@ -9,7 +9,7 @@
 # - Miscellaneous parameters
 # - Kong Enterprise parameters
 
-namespace: kong-ingress
+namespace: aml-dev
 # -----------------------------------------------------------------------------
 # Deployment parameters
 # -----------------------------------------------------------------------------
@@ -117,7 +117,8 @@ env:
 #   client_name: testClient
 
 # This section can be used to configure some extra labels that will be added to each Kubernetes object generated.
-extraLabels: {}
+extraLabels: 
+  system.api: "true"
 
 # Specify Kong's Docker image and repository details here
 image:
@@ -276,7 +277,11 @@ proxy:
   nameOverride: ""
   # To specify annotations or labels for the proxy service, add them to the respective
   # "annotations" or "labels" dictionaries below.
-  annotations: {}
+  annotations: 
+    service.beta.kubernetes.io/aws-load-balancer-type: 
+    service.beta.kubernetes.io/aws-load-balancer-scheme: 
+    service.beta.kubernetes.io/aws-load-balancer-eip-allocations: 
+    service.beta.kubernetes.io/aws-load-balancer-subnets: 
   # If terminating TLS at the ELB, the following annotations can be used
   # "service.beta.kubernetes.io/aws-load-balancer-backend-protocol": "*",
   # "service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled": "true",
@@ -284,8 +289,7 @@ proxy:
   # "service.beta.kubernetes.io/aws-load-balancer-ssl-ports": "kong-proxy-tls",
   # "service.beta.kubernetes.io/aws-load-balancer-type": "elb"
   labels:
-    enable-metrics: "true"
-    system.monitoring: "true"
+    system.api: "true"
 
   http:
     # Enable plaintext HTTP listen for the proxy
@@ -764,7 +768,13 @@ updateStrategy: {}
 
 # If you want to specify resources, uncomment the following
 # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-resources: {}
+resources:
+  limits:
+    cpu: 100m
+    memory: 256Mi
+  requests:
+    cpu: 50m
+    memory: 128Mi
   # limits:
   #  cpu: 1
   #  memory: 2G
@@ -846,7 +856,8 @@ podAnnotations:
   traffic.sidecar.istio.io/includeInboundPorts: ""
 
 # Labels to be added to Kong pods
-podLabels: {}
+podLabels:
+  system.api: "true"
 
 # Kong pod count.
 # It has no effect when autoscaling.enabled is set to true
@@ -938,7 +949,12 @@ serviceMonitor:
   # Specifies whether ServiceMonitor for Prometheus operator should be created
   # If you wish to gather metrics from a Kong instance with the proxy disabled (such as a hybrid control plane), see:
   # https://github.com/Kong/charts/blob/main/charts/kong/README.md#prometheus-operator-integration
-  enabled: false
+  enabled: true
+  interval: 30s
+  namespace: aml-dev
+  labels:
+    release: monitoring
+    system.api: "true"
   # interval: 10s
   # Specifies namespace, where ServiceMonitor should be installed
   # namespace: monitoring

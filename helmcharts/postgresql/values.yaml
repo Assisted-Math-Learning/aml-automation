@@ -13,7 +13,7 @@ global:
   imagePullSecrets: []
   ## @param global.storageClass Global StorageClass for Persistent Volume(s)
   ##
-  storageClass: ""
+  storageClass: "gp2"
   postgresql:
     ## @param global.postgresql.auth.postgresPassword Password for the "postgres" admin user (overrides `auth.postgresPassword`)
     ## @param global.postgresql.auth.username Name for a custom user to create (overrides `auth.username`)
@@ -42,7 +42,7 @@ global:
 
 ## @section Common parameters
 ##
-namespace: postgresql
+namespace: aml-dev
 ## @param kubeVersion Override Kubernetes version
 ##
 kubeVersion: ""
@@ -313,6 +313,14 @@ primary:
   ##
   extendedConfiguration: |
     password_encryption = md5
+    shared_preload_libraries = 'pg_stat_statements' # (change requires restart)
+    pg_stat_statements.max = 10000
+    pg_stat_statements.track = all
+    log_statement = 'all'
+    logging_collector = 'on'
+    log_min_duration_statement = 0 
+    log_filename = 'postgresql.log'
+    log_directory='/opt/bitnami/postgresql/logs'
   ## @param primary.existingExtendedConfigmap Name of an existing ConfigMap with PostgreSQL Primary extended configuration
   ## NOTE: `primary.extendedConfiguration` will be ignored
   ##
@@ -678,7 +686,10 @@ primary:
     ## @param primary.persistence.labels Labels for the PVC
     ##
     labels:
-      system.infra: "true"
+      system.storage: "true"
+      system.ingestion: "true"
+      system.querying: "true"
+      system.api: "true"
     ## @param primary.persistence.selector Selector to match an existing Persistent Volume (this value is evaluated as a template)
     ## selector:
     ##   matchLabels:
@@ -1018,7 +1029,10 @@ readReplicas:
     ## @param readReplicas.persistence.labels Labels for the PVC
     ##
     labels:
-      system.infra: "true"
+      system.storage: "true"
+      system.ingestion: "true"
+      system.querying: "true"
+      system.api: "true"
     ## @param readReplicas.persistence.selector Selector to match an existing Persistent Volume (this value is evaluated as a template)
     ## selector:
     ##   matchLabels:

@@ -1,8 +1,10 @@
-domain: "kong.example"
+domain: &domain ""
 ingress_class_name: "kong"
 cert_secret_name: "kong-ingress-ssl-cert"
-namespace: kong-ingress-routes
+namespace: &namespace aml-dev
 global:
+  domain: *domain
+  namespace: *namespace
   ingress_annotations:
     konghq.com/preserve-host: "true"
     konghq.com/protocols: "https"
@@ -10,13 +12,13 @@ global:
 
 ingress:
   apiservice:
-    name: apiservice
-    namespace: api-service
+    name: api-service
+    namespace: aml-dev
     path_type: "ImplementationSpecific"
     service_name: "api-service"
     domains: []
     annotations: {}
-    service_port: 3000
+    service_port: 3001
     paths:
       - path: "/"
   
