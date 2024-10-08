@@ -146,4 +146,4 @@ env:
   AML_SERVICE_DB_USER: postgres
   AML_SERVICE_DB_PASS: postgres
   AML_SERVICE_DB_NAME: postgres
-  BUCKET_NAME: "aml-dev-otsv83nane"
+  BUCKET_NAME: "sample"
