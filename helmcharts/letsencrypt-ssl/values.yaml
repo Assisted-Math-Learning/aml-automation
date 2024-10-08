@@ -1,13 +1,14 @@
 commonLabels:
   system.api: "true"
-namespace: "api-service"
+namespace: "aml-dev"
 cert_issuer_name: "letsencrypt-prod"
-letsencrypt_server_url: "https://acme-staging-v02.api.letsencrypt.org/directory"
+letsencrypt_server_url: "https://acme-v02.api.letsencrypt.org/directory"
 ingress_class_name: "kong"
 cert_name: "kong-ingress-ssl-cert"
 cert_issuer_type: "ClusterIssuer"
-reflection_namespaces: "superset,monitoring"
-domain_admin_email: "user@example.com"
-domain: ""
+reflection_namespaces: "aml-dev"
+domain_admin_email: ""
+domain: &domain ""
+ssl_enabled: &ssl_enabled true
 global:
-  domain: "kong.local"
+  ssl_enabled: *ssl_enabled
