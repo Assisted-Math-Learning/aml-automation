@@ -11,7 +11,7 @@ global:
 
 registry: ""
 repository: bhanuekstep/aml-api-service
-tag: "1.0.0-GA"
+tag: "1.1.0-GA"
 digest: ""
 
 imagePullPolicy: Always
@@ -56,10 +56,10 @@ ingress:
 resources:
   requests:
     cpu: 100m
-    memory: 256Mi
+    memory: 512Mi
   limits:
     cpu: 1
-    memory: 512Mi
+    memory: 1024Mi
 
 autoscaling:
   enabled: false
@@ -146,3 +146,9 @@ env:
   AML_SERVICE_DB_USER: postgres
   AML_SERVICE_DB_PASS: postgres
   AML_SERVICE_DB_NAME: postgres
+  AML_SERVICE_APP_SECRET: ""
+  BUCKET_NAME: dummy-bucket
+  AWS_EXPIRY_TIME: "600000"
+  UPLOAD_FOLDER: upload
+  TEMPLATE_FOLDER: template
+  MEDIA_FOLDER: media
