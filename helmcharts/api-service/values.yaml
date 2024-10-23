@@ -143,12 +143,15 @@ env:
   AML_SERVICE_APP_VERSION: v1 
   AML_SERVICE_DB_HOST: postgresql.aml-dev.svc.cluster.local
   AML_SERVICE_DB_PORT: "5432"
-  AML_SERVICE_DB_USER: postgres
-  AML_SERVICE_DB_PASS: postgres
-  AML_SERVICE_DB_NAME: postgres
+  AML_SERVICE_DB_USER: ""
+  AML_SERVICE_DB_PASS: ""
+  AML_SERVICE_DB_NAME: aml_service
   AML_SERVICE_APP_SECRET: ""
-  BUCKET_NAME: dummy-bucket
+  BUCKET_NAME: "dummy_bucket"
   AWS_EXPIRY_TIME: "600000"
   UPLOAD_FOLDER: upload
   TEMPLATE_FOLDER: template
   MEDIA_FOLDER: media
+  AML_AWS_ACCESS_KEY: ""
+  AML_AWS_SECRET_KEY: ""
+  AML_AWS_BUCKET_REGION: ""

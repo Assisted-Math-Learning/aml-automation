@@ -143,7 +143,10 @@ env:
   AML_SERVICE_APP_VERSION: v1 
   AML_SERVICE_DB_HOST: postgresql.aml-dev.svc.cluster.local
   AML_SERVICE_DB_PORT: "5432"
-  AML_SERVICE_DB_USER: postgres
-  AML_SERVICE_DB_PASS: postgres
-  AML_SERVICE_DB_NAME: postgres
-  BUCKET_NAME: "sample"
+  AML_SERVICE_DB_USER: ""
+  AML_SERVICE_DB_PASS: ""
+  AML_SERVICE_DB_NAME: aml_service
+  BUCKET_NAME: ""
+  AML_AWS_ACCESS_KEY: ""
+  AML_AWS_SECRET_KEY: ""
+  AML_AWS_BUCKET_REGION: ""
