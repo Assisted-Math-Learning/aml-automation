@@ -786,7 +786,7 @@ resources:
 readinessProbe:
   httpGet:
     path: "/status"
-    port: status
+    port: 8001
     scheme: HTTP
   initialDelaySeconds: 30
   timeoutSeconds: 10
@@ -798,7 +798,7 @@ readinessProbe:
 livenessProbe:
   httpGet:
     path: "/status"
-    port: status
+    port: 8001
     scheme: HTTP
   initialDelaySeconds: 30
   timeoutSeconds: 10
