@@ -32,7 +32,7 @@ Prior to installation, update the respective `values.yaml` files with the follow
 - `domain`: Set to match the sslip (e.g., `example.sslip.io`)
 
 **In `kong/values.yaml`**
-- `service.beta.kubernetes.io/aws-load-balancer-type`: Change to `external` (e.g., `external`)
+- `service.beta.kubernetes.io/aws-load-balancer-type`: Change to `nlb` (e.g., `nlb`)
 - `service.beta.kubernetes.io/aws-load-balancer-scheme`: Set to `internet-facing` (e.g., `internet-facing`)
 - `service.beta.kubernetes.io/aws-load-balancer-eip-allocations`: Match with the sslip (e.g., `eipalloc-12345678`)
 - `service.beta.kubernetes.io/aws-load-balancer-subnets`: Set to the VPC subnets (e.g., `subnet-12345678,subnet-87654321`)
