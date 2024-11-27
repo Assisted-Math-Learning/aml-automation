@@ -53,9 +53,10 @@ module "eks" {
 }
 
 module "iam" {
-  source                = "../modules/aws/iam"
-  env                   = var.env
-  building_block        = var.building_block
+  source         = "../modules/aws/iam"
+  env            = var.env
+  count          = var.create_iam ? 1 : 0
+  building_block = var.building_block
 }
 
 module "s3" {

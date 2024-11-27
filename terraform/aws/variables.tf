@@ -117,3 +117,9 @@ variable "storage_provider" {
   description = "storage provider name e.g: aws, azure, gcp"
   default     = "aws"
 }
+
+variable "create_iam" {
+  description = "Whether to create IAM resources"
+  type        = bool
+  default     = true
+}
