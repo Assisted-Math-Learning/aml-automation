@@ -44,14 +44,14 @@ Prior to installation, update the respective `values.yaml` files with the follow
 **Install each chart**
    ```bash
    # Install cert-manager
-   helm install cert-manager ./cert-manager -n aml --create-namespace
+   helm install cert-manager ./cert-manager -n aml-dev --create-namespace
 
    # Install PostgreSQL
-   helm install postgresql ./postgresql -n aml --create-namespace
+   helm install postgresql ./postgresql -n aml-dev --create-namespace
 
    # Install other services
-   helm install api-service ./api-service -n aml
-   helm install jobs-service ./jobs-service -n aml
+   helm install api-service ./api-service -n aml-dev
+   helm install jobs-service ./jobs-service -n aml-dev
    # Continue with other services as needed
    ```
 
