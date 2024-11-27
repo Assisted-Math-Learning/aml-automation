@@ -4,9 +4,9 @@ This repository contains automation tools and configurations for setting up and 
 
 ## Repository Structure
 
-- `automation-scripts/`: Contains scripts and documentation for cluster creation and infrastructure setup. Please refer to the README in this directory for detailed instructions on cluster creation and setup procedures.
+- `automation-scripts/`: Contains scripts and documentation for cluster creation and infrastructure setup.
 
-- `helmcharts/`: Contains Helm charts and documentation for deploying various services. Please refer to the README in this directory for detailed instructions on service installation and configuration.
+- `helmcharts/`: Contains Helm charts and documentation for deploying various services.
 
 - `terraform/`: Contains Terraform configurations for infrastructure provisioning.
 
