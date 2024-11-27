@@ -1,0 +1,135 @@
+variable "env" {
+  type        = string
+  description = "Environment name. All resources will be prefixed with this value."
+}
+
+variable "building_block" {
+  type        = string
+  description = "Building block name. All resources will be prefixed with this value."
+}
+
+variable "additional_tags" {
+  type        = map(string)
+  description = "Additional tags for the resources. These tags will be applied to all the resources."
+  default     = {}
+}
+
+variable "region" {
+  type        = string
+  description = "AWS region to create the resources."
+}
+variable "cluster_logs_enabled" {
+  type = bool
+  description = "Toggle to enable eks cluster logs"
+}
+variable "eks_cluster_logs_retention" {
+  type = number
+  description = "EKS cluster logs retention period"
+  default = 1 
+}
+
+variable "eks_master_role" {
+  type        = string
+  description = "EKS control plane role name."
+  default     = "eks_master_role"
+}
+
+variable "eks_nodes_role" {
+  type        = string
+  description = "EKS data plane role name.."
+  default     = "eks_nodes_role"
+}
+
+variable "eks_node_group_name" {
+  type        = string
+  description = "EKS node group name."
+  default     = "eks_node_group"
+}
+
+variable "eks_node_group_ami_type" {
+  type        = string
+  description = "EKS node group AMI type."
+  default     = "AL2_x86_64"
+}
+
+variable "eks_node_group_instance_type" {
+  type        = list(string)
+  description = "EKS nodegroup instance types."
+  default     = ["t2.xlarge"]
+}
+
+variable "eks_node_group_capacity_type" {
+  type        = string
+  description = "EKS node group type. Either SPOT or ON_DEMAND can be used"
+  default     = "ON_DEMAND"
+}
+
+variable "eks_node_group_scaling_config" {
+  type        = map(number)
+  description = "EKS node group auto scaling configuration."
+  default = {
+    desired_size = 5
+    max_size     = 5
+    min_size     = 1
+  }
+}
+
+variable "eks_version" {
+  type        = string
+  description = "EKS version."
+  default     = "1.30"
+}
+
+variable "eks_addons" {
+  type = list(object({
+    name  = string
+    version = string
+  }))
+
+  default = [
+    {
+    name  = "kube-proxy"
+    version = "v1.30.0-eksbuild.3"
+    },
+    {
+    name  = "vpc-cni"
+    version = "v1.18.2-eksbuild.1"
+    },
+    {
+    name  = "coredns"
+    version = "v1.11.1-eksbuild.9"
+    },
+    {
+    name  = "aws-ebs-csi-driver"
+    version = "v1.30.0-eksbuild.1"
+    }
+  ]
+}
+
+variable eks_master_subnet_ids {
+  type        = list(string)
+  description = "The VPC's public subnet id which will be used to create the EKS cluster."
+}
+
+variable eks_nodes_subnet_ids {
+  type        = list(string)
+  description = "The VPC's public subnet id which will be used to create the EKS node groups."
+}
+
+variable "eks_node_disk_size" {
+  type        = number
+  description = "EKS nodes disk size"
+  default     = 30
+}
+
+variable "oidc_thumbprint_list" {
+  type        = list(string)
+  description = "Additional list of server certificate thumbprints for the OpenID Connect (OIDC) identity provider's server certificate(s)"
+  default     = []
+}
+
+variable "eks_endpoint_private_access" {
+   type        = bool
+   description = "API server endpoint access"
+   default     = false
+}
